@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from "styled-components";
 import CreateMessage from "./components/creater/createMessage";
 import GlobalStyle from "./GlobalStyle";
 import { marsTheme } from "./theme";
+import ResultMessage from "./components/result/ResultMessage";
 
 function App() {
     return (
@@ -10,6 +11,7 @@ function App() {
             <GlobalStyle />
             <Main>
                 <CreateMessage />
+                <ResultMessage />
             </Main>
         </ThemeProvider>
     );

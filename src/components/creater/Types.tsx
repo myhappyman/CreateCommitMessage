@@ -1,47 +1,53 @@
 import styled from "styled-components";
+import { useSetRecoilState } from "recoil";
+import { selectTypes } from "../../atom";
+import { Item, List, SectionName, Wrapper } from "../commonStyled";
 
 export default function TypesUI() {
+    const setSelectTypes = useSetRecoilState(selectTypes);
+    const clickTypes = (name: string) => setSelectTypes(name);
     return (
         <Wrapper>
-            <Area>
-                {datas.map((d) => (
-                    <Item>
-                        <Title>{d.name}:</Title>
+            <SectionName>타입 선택하기</SectionName>
+            <List>
+                {datas.map((d, i) => (
+                    <Item
+                        key={`${d.name}${i}`}
+                        onClick={() => clickTypes(d.name)}
+                    >
+                        <Title>{`${d.name === "" ? "" : d.name + ":"}`}</Title>
                         <Desc>{d.desc}</Desc>
                     </Item>
                 ))}
-            </Area>
+            </List>
         </Wrapper>
     );
 }
 
-const Area = styled.ul`
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 1.5rem;
-`;
-const Item = styled.li`
-    padding: 1rem;
-    box-shadow: ${(props) => props.theme.boxShadowHover};
-    cursor: pointer;
-`;
-
 const Title = styled.div`
-    font-size: 1.6rem;
+    padding: 1rem 1rem 0.5rem;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    font-size: 2rem;
 `;
 
 const Desc = styled.div`
+    padding: 0.5rem 1rem 1rem;
     font-size: 1.4rem;
 `;
 
 const datas = [
     {
+        name: "",
+        desc: "none (선택 안함)",
+    },
+    {
         name: "feat",
-        desc: "새로운 기능을 추가하는 커밋입니다.",
+        desc: "새로운 기능을 추가",
     },
     {
         name: "fix",
-        desc: "버그를 수정하는 커밋입니다.",
+        desc: "버그를 수정",
     },
     {
         name: "chore",
@@ -72,5 +78,3 @@ const datas = [
         desc: "테스트 관련 작업",
     },
 ];
-
-const Wrapper = styled.div``;
