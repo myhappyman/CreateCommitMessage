@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/CreateCommitMessage/static/js/main.8d414d0d.js",
+    "index.html": "/CreateCommitMessage/index.html",
+    "main.8d414d0d.js.map": "/CreateCommitMessage/static/js/main.8d414d0d.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.8d414d0d.js"
+  ]
+}
