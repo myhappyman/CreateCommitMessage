@@ -28,3 +28,16 @@ export const Tip = styled.li`
     font-weight: 700;
     color: #fff;
 `;
+
+export const NormalBtn = styled.button`
+    padding: 1rem;
+    border: none;
+    border-radius: 0.6rem;
+    font-size: 1.4rem;
+    color: #fff;
+    background-color: #0a3d62;
+    cursor: pointer;
+    & ~ & {
+        margin-left: 1rem;
+    }
+`;

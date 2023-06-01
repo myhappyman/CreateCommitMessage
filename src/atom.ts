@@ -1,31 +1,44 @@
 import { atom, selector } from "recoil";
 
-export const selectTypes = atom<string | null>({
-    key: "selectTypes",
-    default: null,
+export interface ICommitMessage {
+    commitType: string;
+    commitEmoji: string;
+    commitTitle: string;
+    commitBody: string;
+}
+
+export const componentsIndex = atom<number>({
+    key: "componentsIndex",
+    default: 0,
 });
 
-export const selectEmojis = atom<string | null>({
-    key: "selectEmojis",
-    default: null,
-});
-
-export const writeTitle = atom<string>({
-    key: "writeTitle",
+export const commitTypes = atom<string>({
+    key: "commitTypes",
     default: "",
 });
 
-export const writeBody = atom<string>({
-    key: "writeBody",
+export const commitEmojis = atom<string>({
+    key: "commitEmojis",
+    default: "",
+});
+
+export const commitTitle = atom<string>({
+    key: "commitTitle",
+    default: "",
+});
+
+export const commitBody = atom<string>({
+    key: "commitBody",
     default: "",
 });
 
 export const selectMessage = selector({
     key: "selectMessage",
     get: ({ get }) => {
-        const type = get(selectTypes) ? get(selectTypes) + ":" : "";
-        const emoji = get(selectEmojis) ? get(selectEmojis) : "";
-        const title = get(writeTitle);
-        return type + " " + emoji + " " + title;
+        const type = get(commitTypes) ? get(commitTypes) + ":" : "";
+        const emoji = get(commitEmojis) ? get(commitEmojis) : "";
+        const title = get(commitTitle);
+        const body = get(commitBody);
+        return `${type} ${emoji} ${title}\n\n${body}`;
     },
 });

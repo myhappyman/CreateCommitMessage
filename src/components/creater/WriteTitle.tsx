@@ -1,23 +1,21 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
-import { writeTitle } from "../../atom";
+import { ICommitMessage, commitTitle, componentsIndex } from "../../atom";
 import { Area, SectionName, Tip, TipArea, Wrapper } from "../commonStyled";
 
-interface IForm {
-    title: string;
-}
-
 export default function WriteTitle() {
-    const setWriteTitle = useSetRecoilState(writeTitle);
+    const setIndex = useSetRecoilState(componentsIndex);
+    const setCommitTitle = useSetRecoilState(commitTitle);
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<IForm>();
-    const onValid = (data: IForm) => {
-        const { title } = data;
-        setWriteTitle(title);
+    } = useForm<Pick<ICommitMessage, "commitTitle">>();
+    const onValid = (data: Pick<ICommitMessage, "commitTitle">) => {
+        const { commitTitle } = data;
+        setCommitTitle(commitTitle);
+        setIndex((prev: number) => prev + 1);
     };
     return (
         <Wrapper>
@@ -31,7 +29,7 @@ export default function WriteTitle() {
                 </TipArea>
                 <Form onSubmit={handleSubmit(onValid)}>
                     <Input
-                        {...register("title", {
+                        {...register("commitTitle", {
                             required: "커밋 제목은 필수값입니다.",
                             minLength: {
                                 value: 2,
@@ -39,26 +37,27 @@ export default function WriteTitle() {
                             },
                             maxLength: {
                                 value: 50,
-                                message: "최대 50글자까지 작성하세요.",
+                                message: "최대 50자까지 작성하세요.",
                             },
                         })}
                         placeholder="제목을 입력하세요."
                     />
                     <br />
-                    <ErrorMessage>{errors.title?.message}</ErrorMessage>
+                    <ErrorMessage>{errors.commitTitle?.message}</ErrorMessage>
                 </Form>
             </Area>
         </Wrapper>
     );
 }
-const Form = styled.form`
+
+export const Form = styled.form`
     position: relative;
     padding: 2rem 0;
     margin-top: 1rem;
     width: 50%;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
     font-family: inherit;
     width: 100%;
     padding: 0.7rem 0;
@@ -85,7 +84,7 @@ const Input = styled.input`
     }
 `;
 
-const ErrorMessage = styled.span`
+export const ErrorMessage = styled.span`
     font-size: 1.4rem;
     color: red;
 `;
