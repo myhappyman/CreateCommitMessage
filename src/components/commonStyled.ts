@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div``;
 
 export const SectionName = styled.h2`
+    margin: 1rem 0 3rem;
     font-size: 3rem;
 `;
 
@@ -10,6 +11,8 @@ export const List = styled.ul`
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 1.5rem;
+    max-height: 30rem;
+    overflow: auto;
 `;
 export const Item = styled.li`
     display: flex;

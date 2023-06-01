@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
@@ -11,12 +12,17 @@ export default function WriteTitle() {
         register,
         handleSubmit,
         formState: { errors },
+        setFocus,
     } = useForm<Pick<ICommitMessage, "commitTitle">>();
     const onValid = (data: Pick<ICommitMessage, "commitTitle">) => {
         const { commitTitle } = data;
         setCommitTitle(commitTitle);
         setIndex((prev: number) => prev + 1);
     };
+
+    useEffect(() => {
+        setFocus("commitTitle");
+    }, [setFocus]);
     return (
         <Wrapper>
             <SectionName>커밋 메시지 제목 작성</SectionName>
@@ -40,7 +46,7 @@ export default function WriteTitle() {
                                 message: "최대 50자까지 작성하세요.",
                             },
                         })}
-                        placeholder="제목을 입력하세요."
+                        placeholder="메시지를 작성하고 Enter키를 통해 입력하세요."
                     />
                     <br />
                     <ErrorMessage>{errors.commitTitle?.message}</ErrorMessage>
@@ -69,7 +75,7 @@ export const Input = styled.input`
     transition: border-color 0.2s;
 
     &::placeholder {
-        color: transparent;
+        color: #fff;
         font-size: 1.3rem;
         cursor: text;
         top: 20px;

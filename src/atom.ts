@@ -4,7 +4,7 @@ export interface ICommitMessage {
     commitType: string;
     commitEmoji: string;
     commitTitle: string;
-    commitBody: string;
+    commitBodyText: string;
 }
 
 export const componentsIndex = atom<number>({
@@ -27,9 +27,9 @@ export const commitTitle = atom<string>({
     default: "",
 });
 
-export const commitBody = atom<string>({
+export const commitBody = atom<string[]>({
     key: "commitBody",
-    default: "",
+    default: [],
 });
 
 export const selectMessage = selector({
@@ -38,7 +38,7 @@ export const selectMessage = selector({
         const type = get(commitTypes) ? get(commitTypes) + ":" : "";
         const emoji = get(commitEmojis) ? get(commitEmojis) : "";
         const title = get(commitTitle);
-        const body = get(commitBody);
+        const body = get(commitBody).join("\n");
         return `${type} ${emoji} ${title}\n\n${body}`;
     },
 });

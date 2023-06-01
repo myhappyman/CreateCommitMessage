@@ -74,7 +74,7 @@ const GlobalStyle = createGlobalStyle`
     border-spacing: 0;
   }  
   body {
-    font-family: 'Poppins', 'Pretendard', sans-serif;    
+    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 300;
     font-display: swap;
     /* iphone 갑자기 폰트 크게 터지는 현상 방지용 */
