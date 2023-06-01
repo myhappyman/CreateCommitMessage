@@ -1,7 +1,12 @@
-export const types_arr = [
+interface ITypes {
+    name: string;
+    desc: string;
+}
+
+export const types_arr: ITypes[] = [
     {
-        name: "",
-        desc: "none (선택 안함)",
+        name: "none",
+        desc: "선택 안함",
     },
     {
         name: "feat",
@@ -12,20 +17,24 @@ export const types_arr = [
         desc: "버그를 수정",
     },
     {
-        name: "chore",
-        desc: "기타 작업",
-    },
-    {
-        name: "design",
-        desc: "css관련 UI 디자인 작업",
-    },
-    {
         name: "docs",
         desc: "주석 작업, 문서 추가 관련 행위",
     },
     {
+        name: "chore",
+        desc: "기타 작업",
+    },
+    {
+        name: "style",
+        desc: "CSS 관련 UI 디자인 작업",
+    },
+    {
         name: "refactor",
-        desc: "제품 리팩토링 수행",
+        desc: "코드 리팩토링 수행",
+    },
+    {
+        name: "perf",
+        desc: "퍼포먼스, 성능 관련 작업",
     },
     {
         name: "remove",
@@ -38,5 +47,13 @@ export const types_arr = [
     {
         name: "test",
         desc: "테스트 관련 작업",
+    },
+    {
+        name: "build",
+        desc: "제품 빌드 관련 작업(dependency, maven, npm 등)",
+    },
+    {
+        name: "ci",
+        desc: "CI 구성 파일 및 스크립트 관련 작업",
     },
 ];
