@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { ICommitMessage, commitTitle, componentsIndex } from "../../atom";
-import { Area, SectionName, Tip, TipArea, Wrapper } from "../commonStyled";
+import { Area, Tip, TipArea } from "../common/commonStyled";
 
 export default function WriteTitle() {
     const setIndex = useSetRecoilState(componentsIndex);
@@ -24,35 +24,32 @@ export default function WriteTitle() {
         setFocus("commitTitle");
     }, [setFocus]);
     return (
-        <Wrapper>
-            <SectionName>커밋 메시지 제목 작성</SectionName>
-            <Area>
-                <TipArea>
-                    <Tip>간결하고 요약하여 작성합니다.</Tip>
-                    <Tip>마침표나 특수기호는 되도록 사용하지 않습니다.</Tip>
-                    <Tip>과거시제를 사용하지 않습니다.</Tip>
-                    <Tip>50자 이내로 작성합니다.</Tip>
-                </TipArea>
-                <Form onSubmit={handleSubmit(onValid)}>
-                    <Input
-                        {...register("commitTitle", {
-                            required: "커밋 제목은 필수값입니다.",
-                            minLength: {
-                                value: 2,
-                                message: "최소 2글자 이상 입력하세요.",
-                            },
-                            maxLength: {
-                                value: 50,
-                                message: "최대 50자까지 작성하세요.",
-                            },
-                        })}
-                        placeholder="메시지를 작성하고 Enter키를 통해 입력하세요."
-                    />
-                    <br />
-                    <ErrorMessage>{errors.commitTitle?.message}</ErrorMessage>
-                </Form>
-            </Area>
-        </Wrapper>
+        <Area>
+            <TipArea>
+                <Tip>간결하고 요약하여 작성합니다.</Tip>
+                <Tip>마침표나 특수기호는 되도록 사용하지 않습니다.</Tip>
+                <Tip>과거시제를 사용하지 않습니다.</Tip>
+                <Tip>50자 이내로 작성합니다.</Tip>
+            </TipArea>
+            <Form onSubmit={handleSubmit(onValid)}>
+                <Input
+                    {...register("commitTitle", {
+                        required: "커밋 제목은 필수값입니다.",
+                        minLength: {
+                            value: 2,
+                            message: "최소 2글자 이상 입력하세요.",
+                        },
+                        maxLength: {
+                            value: 50,
+                            message: "최대 50자까지 작성하세요.",
+                        },
+                    })}
+                    placeholder="메시지를 작성하고 Enter키를 통해 입력하세요."
+                />
+                <br />
+                <ErrorMessage>{errors.commitTitle?.message}</ErrorMessage>
+            </Form>
+        </Area>
     );
 }
 
@@ -72,6 +69,7 @@ export const Input = styled.input`
     border-bottom: 2px solid #9b9b9b;
     outline: 0;
     background: transparent;
+    color: #ddd;
     transition: border-color 0.2s;
 
     &::placeholder {

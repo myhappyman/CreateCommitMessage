@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { NormalBtn } from "../commonStyled";
+import { NormalBtn } from "./commonStyled";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
     commitBody,
@@ -8,13 +8,13 @@ import {
     commitTypes,
     componentsIndex,
 } from "../../atom";
-import { components } from "./createMessage";
+import { components } from "../creater/createMessage";
 
 export default function CommonButtons() {
     const [index, setIndex] = useRecoilState(componentsIndex);
     const setCommitTypes = useSetRecoilState(commitTypes);
     const setCommitEmojis = useSetRecoilState(commitEmojis);
-    const [title, setCommitTitle] = useRecoilState(commitTitle);
+    const setCommitTitle = useSetRecoilState(commitTitle);
     const setCommitBody = useSetRecoilState(commitBody);
     const goBack = () => {
         if (index === 0) return;
@@ -24,7 +24,7 @@ export default function CommonButtons() {
         if (index === 0) return;
         if (window.confirm("작성 중인 메시지가 초기화 됩니다")) {
             setIndex(0);
-            setCommitTypes("");
+            setCommitTypes("none");
             setCommitEmojis("");
             setCommitTitle("");
             setCommitBody([]);
@@ -39,9 +39,7 @@ export default function CommonButtons() {
                 if (index > 0) {
                     return (
                         <>
-                            <NormalBtn onClick={messageReset}>
-                                처음으로
-                            </NormalBtn>
+                            <NormalBtn onClick={messageReset}>초기화</NormalBtn>
                             <NormalBtn onClick={goBack}>뒤로</NormalBtn>
                         </>
                     );

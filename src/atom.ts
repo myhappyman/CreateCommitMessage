@@ -19,7 +19,7 @@ export const componentsIndex = atom<number>({
 
 export const commitTypes = atom<string>({
     key: "commitTypes",
-    default: "",
+    default: "none",
 });
 
 export const commitEmojis = atom<string>({
@@ -40,10 +40,10 @@ export const commitBody = atom<string[]>({
 export const selectMessage = selector({
     key: "selectMessage",
     get: ({ get }) => {
-        const type = get(commitTypes) ? get(commitTypes) + ":" : "";
+        let type = get(commitTypes) === "none" ? "" : get(commitTypes) + ":";
         const emoji = get(commitEmojis) ? get(commitEmojis) : "";
         const title = get(commitTitle);
         const body = get(commitBody).join("\n");
-        return `${type} ${emoji} ${title}\n\n${body}`;
+        return `${type} ${emoji} ${title}\n\n${body}`.trim();
     },
 });

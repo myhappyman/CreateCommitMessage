@@ -98,15 +98,20 @@ const GlobalStyle = createGlobalStyle`
     -webkit-text-fill-color: #000 !important;
   }
 
-  html::-webkit-scrollbar {
+  html::-webkit-scrollbar{
     width: 6px;
     height: 6px;
   }
-  html::-webkit-scrollbar-thumb {
+  ul::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+   
+  html::-webkit-scrollbar-thumb, ul::-webkit-scrollbar-thumb{
     background-color: #4e4e4e;
     border-radius: 100px;
   }
-  html::-webkit-scrollbar-track {
+  html::-webkit-scrollbar-track, ul::-webkit-scrollbar-thumb {
     background-color: #4e4e4e;
     border-radius: 100px;
     background-clip: padding-box;
