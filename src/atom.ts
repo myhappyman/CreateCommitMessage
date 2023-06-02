@@ -7,6 +7,11 @@ export interface ICommitMessage {
     commitBodyText: string;
 }
 
+export const visibleToast = atom({
+    key: "visibleToast",
+    default: false,
+});
+
 export const componentsIndex = atom<number>({
     key: "componentsIndex",
     default: 0,
